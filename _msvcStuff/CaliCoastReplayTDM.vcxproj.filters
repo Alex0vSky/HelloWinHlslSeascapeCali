@@ -16,8 +16,14 @@
     <Filter Include="_pch">
       <UniqueIdentifier>{d908d6e3-dc21-4768-9872-f958f7f240b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Dx9">
+      <UniqueIdentifier>{98d41518-c302-46ab-b53d-a455e507f9e9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resource Files\Dx10">
       <UniqueIdentifier>{956e82fc-5d06-4505-b957-a0f1ed0920f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Dx11">
+      <UniqueIdentifier>{07cfb041-d0e3-47cc-946e-d6340c942140}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Dx12">
       <UniqueIdentifier>{e9a0b0e5-09dc-4374-aa85-eed5c2d20fda}</UniqueIdentifier>
@@ -48,6 +54,18 @@
     </FxCompile>
     <FxCompile Include="..\resource\Cali_vs_Dx12.hlsl">
       <Filter>Resource Files\Dx12</Filter>
+    </FxCompile>
+    <FxCompile Include="..\resource\Cali_ps_Dx9.hlsl">
+      <Filter>Resource Files\Dx9</Filter>
+    </FxCompile>
+    <FxCompile Include="..\resource\Cali_vs_Dx9.hlsl">
+      <Filter>Resource Files\Dx9</Filter>
+    </FxCompile>
+    <FxCompile Include="..\resource\Cali_ps_Dx11.hlsl">
+      <Filter>Resource Files\Dx11</Filter>
+    </FxCompile>
+    <FxCompile Include="..\resource\Cali_vs_Dx11.hlsl">
+      <Filter>Resource Files\Dx11</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
