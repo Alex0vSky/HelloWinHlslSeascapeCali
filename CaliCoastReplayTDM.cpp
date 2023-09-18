@@ -29,8 +29,20 @@ template<> class CaliCoastReplayTDM<DxVer::v9> : public CurClientApp<DxVer::v9> 
 		Sys::Hr hr;
 
 		// Load shaders
-		m_pcVs = puoTools ->shader( ) ->loader( ) ->byteCode( ) ->fromFile( ) ->Vs( L"Cali_vs_Dx9.cso" );
-		m_pcPs = puoTools ->shader( ) ->loader( ) ->byteCode( ) ->fromFile( ) ->Ps( L"Cali_ps_Dx9.cso" );
+		m_pcVs = puoTools ->shader( ) ->loader( ) ->arrayC( ) ->fromHeader( ) ->Vs( 
+				[]() ->const auto & {
+					static 
+#include "resource\Cali_vs_Dx9.hlsl.h"
+					return g_main;
+				}
+			);
+		m_pcPs = puoTools ->shader( ) ->loader( ) ->arrayC( ) ->fromHeader( ) ->Ps( 
+				[]() ->const auto & {
+					static 
+#include "resource\Cali_ps_Dx9.hlsl.h"
+					return g_main;
+				}
+			);
 		if ( !m_pcVs || !m_pcPs )
 			return false;
 		hr = crpustDxCtx ->m_pcD3dDevice ->SetVertexShader( m_pcVs.Get( ) );
@@ -85,8 +97,21 @@ template<> class CaliCoastReplayTDM<DxVer::v10> : public CurClientApp<DxVer::v10
 
 		// Load shaders
 		std::vector<BYTE> veShaderByte;
-		m_pcVs = puoTools ->shader( ) ->loader( ) ->byteCode( ) ->fromFile( ) ->Vs( L"Cali_vs_Dx10.cso", &veShaderByte );
-		m_pcPs = puoTools ->shader( ) ->loader( ) ->byteCode( ) ->fromFile( ) ->Ps( L"Cali_ps_Dx10.cso" );
+		m_pcVs = puoTools ->shader( ) ->loader( ) ->arrayC( ) ->fromHeader( ) ->Vs( 
+				[]() ->const auto & {
+					static 
+#include "resource\Cali_vs_Dx10.hlsl.h"
+					return g_main;
+				}
+				, &veShaderByte
+			);
+		m_pcPs = puoTools ->shader( ) ->loader( ) ->arrayC( ) ->fromHeader( ) ->Ps( 
+				[]() ->const auto & {
+					static 
+#include "resource\Cali_ps_Dx10.hlsl.h"
+					return g_main;
+				}
+			);
 		if ( !m_pcVs || !m_pcPs )
 			return false;
 		crpustDxCtx ->m_pcD3dDevice ->VSSetShader( m_pcVs.Get( ) );
@@ -153,8 +178,21 @@ template<> class CaliCoastReplayTDM<DxVer::v11> : public CurClientApp<DxVer::v11
 
 		// Load shaders
 		std::vector<BYTE> veShaderByte;
-		m_pcVs = puoTools ->shader( ) ->loader( ) ->byteCode( ) ->fromFile( ) ->Vs( L"Cali_vs_Dx11.cso", &veShaderByte );
-		m_pcPs = puoTools ->shader( ) ->loader( ) ->byteCode( ) ->fromFile( ) ->Ps( L"Cali_ps_Dx11.cso" );
+		m_pcVs = puoTools ->shader( ) ->loader( ) ->arrayC( ) ->fromHeader( ) ->Vs( 
+				[]() ->const auto & {
+					static 
+#include "resource\Cali_vs_Dx11.hlsl.h"
+					return g_main;
+				}
+				, &veShaderByte
+			);
+		m_pcPs = puoTools ->shader( ) ->loader( ) ->arrayC( ) ->fromHeader( ) ->Ps( 
+				[]() ->const auto & {
+					static 
+#include "resource\Cali_ps_Dx11.hlsl.h"
+					return g_main;
+				}
+			);
 		if ( !m_pcVs || !m_pcPs )
 			return false;
 		crpustDxCtx ->m_pcDeviceContext ->VSSetShader( m_pcVs.Get( ), nullptr, 0 );
@@ -223,8 +261,20 @@ template<> class CaliCoastReplayTDM <DxVer::v12> : public CurClientApp<DxVer::v1
 	bool init(DxCtx<T>::cref_ptr_t crpustDxCtx, ToolCtx<T>::cref_ptr_t puoTools, Adjust<T>* poAdjustDxAux) {
 		Sys::Hr hr;
 		// Load shaders
-		m_pcVs = puoTools ->shader( ) ->loader( ) ->byteCode( ) ->fromFile( ) ->Vs( L"Cali_vs_Dx12.cso" );
-		m_pcPs = puoTools ->shader( ) ->loader( ) ->byteCode( ) ->fromFile( ) ->Ps( L"Cali_ps_Dx12.cso" );
+		m_pcVs = puoTools ->shader( ) ->loader( ) ->arrayC( ) ->fromHeader( ) ->Vs( 
+				[]() ->const auto & {
+					static 
+#include "resource\Cali_vs_Dx12.hlsl.h"
+					return g_main;
+				}
+			);
+		m_pcPs = puoTools ->shader( ) ->loader( ) ->arrayC( ) ->fromHeader( ) ->Ps( 
+				[]() ->const auto & {
+					static 
+#include "resource\Cali_ps_Dx12.hlsl.h"
+					return g_main;
+				}
+			);
 		if ( !m_pcVs || !m_pcPs )
 			return false;
 		// Get input layout
