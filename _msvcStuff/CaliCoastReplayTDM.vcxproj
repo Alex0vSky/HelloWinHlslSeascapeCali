@@ -5,6 +5,14 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="FastBuild|Win32">
+      <Configuration>FastBuild</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="FastBuild|x64">
+      <Configuration>FastBuild</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
@@ -97,6 +105,7 @@
     <IntDir>bin\$(PlatformTarget)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>bin\$(PlatformTarget)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -124,16 +133,18 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <AdditionalIncludeDirectories>..\_msvcStuff;$(A0S_path)src;$(A0S_path)ThirdParty;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeaderOutputFile>$(A0S_path)bin\$(PlatformTarget)\$(Configuration)\HelloWinHlsl.pch</PrecompiledHeaderOutputFile>
+      <ProgramDataBaseFileName>$(A0S_path)lib\$(PlatformTarget)\$(Configuration)\HelloWinHlsl.pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(A0S_path)lib\$(PlatformTarget)\$(Configuration); $(A0S_path)resource; </AdditionalLibraryDirectories>
-      <AdditionalDependencies>HelloWinHlsl.lib;HelloWinHlsl.res; $(A0S_path)bin\$(PlatformTarget)\$(Configuration)\stdafx.obj;$(A0S_path)bin\$(PlatformTarget)\$(Configuration)\HelloWinHlsl.obj;</AdditionalDependencies>
+      <AdditionalDependencies>delayimp.lib;HelloWinHlsl.lib;HelloWinHlsl.res;</AdditionalDependencies>
       <DelayLoadDLLs>dxgi.dll;dwrite.dll;d2d1.dll; d3d9.dll;d3dx9.dll;D3DX9_43.dll; d3d10_1.dll;d3dx10.dll; d3d11.dll;d3dcompiler.dll;D3DCompiler_47.dll; d3d11.dll;d3d11_3SDKLayers.dll; d3d12.dll;</DelayLoadDLLs>
       <AdditionalOptions>/ignore:4199 /ignore:4204 /ignore:4099</AdditionalOptions>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -151,7 +162,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(A0S_path)lib\$(PlatformTarget)\$(Configuration); $(A0S_path)resource; </AdditionalLibraryDirectories>
-      <AdditionalDependencies>HelloWinHlsl.lib;HelloWinHlsl.res; $(A0S_path)bin\$(PlatformTarget)\$(Configuration)\stdafx.obj;</AdditionalDependencies>
+      <AdditionalDependencies>delayimp.lib;HelloWinHlsl.lib;HelloWinHlsl.res; $(A0S_path)bin\$(PlatformTarget)\$(Configuration)\stdafx.obj;</AdditionalDependencies>
       <DelayLoadDLLs>dxgi.dll;dwrite.dll;d2d1.dll; d3d9.dll;d3dx9.dll;D3DX9_43.dll; d3d10_1.dll;d3dx10.dll; d3d11.dll;d3dcompiler.dll;D3DCompiler_47.dll; d3d11.dll;d3d11_3SDKLayers.dll; d3d12.dll;</DelayLoadDLLs>
       <AdditionalOptions>/ignore:4199 /ignore:4204 /ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -174,34 +185,12 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(A0S_path)lib\$(PlatformTarget)\$(Configuration); $(A0S_path)resource; </AdditionalLibraryDirectories>
-      <AdditionalDependencies>HelloWinHlsl.lib;HelloWinHlsl.res; $(A0S_path)bin\$(PlatformTarget)\$(Configuration)\stdafx.obj;</AdditionalDependencies>
+      <AdditionalDependencies>delayimp.lib;HelloWinHlsl.lib;HelloWinHlsl.res; $(A0S_path)bin\$(PlatformTarget)\$(Configuration)\stdafx.obj;</AdditionalDependencies>
       <DelayLoadDLLs>dxgi.dll;dwrite.dll;d2d1.dll; d3d9.dll;d3dx9.dll;D3DX9_43.dll; d3d10_1.dll;d3dx10.dll; d3d11.dll;d3dcompiler.dll;D3DCompiler_47.dll; d3d11.dll;d3d11_3SDKLayers.dll; d3d12.dll;</DelayLoadDLLs>
       <AdditionalOptions>/ignore:4199 /ignore:4204 /ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <OptimizeReferences>false</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">
-    <ClCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\_msvcStuff;$(A0S_path)src;$(A0S_path)ThirdParty;</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
-      <PrecompiledHeaderOutputFile>$(A0S_path)bin\$(PlatformTarget)\$(Configuration)\HelloWinHlsl.pch</PrecompiledHeaderOutputFile>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(A0S_path)lib\$(PlatformTarget)\$(Configuration); $(A0S_path)resource; </AdditionalLibraryDirectories>
-      <AdditionalDependencies>HelloWinHlsl.lib;HelloWinHlsl.res; $(A0S_path)bin\$(PlatformTarget)\$(Configuration)\stdafx.obj;</AdditionalDependencies>
-      <DelayLoadDLLs>dxgi.dll;dwrite.dll;d2d1.dll; d3d9.dll;d3dx9.dll;D3DX9_43.dll; d3d10_1.dll;d3dx10.dll; d3d11.dll;d3dcompiler.dll;D3DCompiler_47.dll; d3d11.dll;d3d11_3SDKLayers.dll; d3d12.dll;</DelayLoadDLLs>
-      <AdditionalOptions>/ignore:4199 /ignore:4204 /ignore:4099</AdditionalOptions>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -211,13 +200,14 @@
       <AdditionalIncludeDirectories>..\_msvcStuff;$(A0S_path)src;$(A0S_path)ThirdParty;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeaderOutputFile>$(A0S_path)bin\$(PlatformTarget)\$(Configuration)\HelloWinHlsl.pch</PrecompiledHeaderOutputFile>
+      <ProgramDataBaseFileName>$(A0S_path)lib\$(PlatformTarget)\$(Configuration)\HelloWinHlsl.pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(A0S_path)lib\$(PlatformTarget)\$(Configuration); $(A0S_path)resource; </AdditionalLibraryDirectories>
-      <AdditionalDependencies>HelloWinHlsl.lib;HelloWinHlsl.res; $(A0S_path)bin\$(PlatformTarget)\$(Configuration)\stdafx.obj;</AdditionalDependencies>
+      <AdditionalDependencies>delayimp.lib;HelloWinHlsl.lib;HelloWinHlsl.res;</AdditionalDependencies>
       <DelayLoadDLLs>dxgi.dll;dwrite.dll;d2d1.dll; d3d9.dll;d3dx9.dll;D3DX9_43.dll; d3d10_1.dll;d3dx10.dll; d3d11.dll;d3dcompiler.dll;D3DCompiler_47.dll; d3d11.dll;d3d11_3SDKLayers.dll; d3d12.dll;</DelayLoadDLLs>
       <AdditionalOptions>/ignore:4199 /ignore:4204 /ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
@@ -237,7 +227,29 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(A0S_path)lib\$(PlatformTarget)\$(Configuration); $(A0S_path)resource; </AdditionalLibraryDirectories>
-      <AdditionalDependencies>HelloWinHlsl.lib;HelloWinHlsl.res; $(A0S_path)bin\$(PlatformTarget)\$(Configuration)\stdafx.obj;</AdditionalDependencies>
+      <AdditionalDependencies>delayimp.lib;HelloWinHlsl.lib;HelloWinHlsl.res; $(A0S_path)bin\$(PlatformTarget)\$(Configuration)\stdafx.obj;</AdditionalDependencies>
+      <DelayLoadDLLs>dxgi.dll;dwrite.dll;d2d1.dll; d3d9.dll;d3dx9.dll;D3DX9_43.dll; d3d10_1.dll;d3dx10.dll; d3d11.dll;d3dcompiler.dll;D3DCompiler_47.dll; d3d11.dll;d3d11_3SDKLayers.dll; d3d12.dll;</DelayLoadDLLs>
+      <AdditionalOptions>/ignore:4199 /ignore:4204 /ignore:4099</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\_msvcStuff;$(A0S_path)src;$(A0S_path)ThirdParty;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <PrecompiledHeaderOutputFile>$(A0S_path)bin\$(PlatformTarget)\$(Configuration)\HelloWinHlsl.pch</PrecompiledHeaderOutputFile>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>$(A0S_path)lib\$(PlatformTarget)\Release; $(A0S_path)lib\$(PlatformTarget)\$(Configuration); $(A0S_path)resource; </AdditionalLibraryDirectories>
+      <AdditionalDependencies>delayimp.lib;HelloWinHlsl.lib;HelloWinHlsl.res; $(A0S_path)bin\$(PlatformTarget)\$(Configuration)\stdafx.obj;</AdditionalDependencies>
       <DelayLoadDLLs>dxgi.dll;dwrite.dll;d2d1.dll; d3d9.dll;d3dx9.dll;D3DX9_43.dll; d3d10_1.dll;d3dx10.dll; d3d11.dll;d3dcompiler.dll;D3DCompiler_47.dll; d3d11.dll;d3d11_3SDKLayers.dll; d3d12.dll;</DelayLoadDLLs>
       <AdditionalOptions>/ignore:4199 /ignore:4204 /ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -260,8 +272,7 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <!--
-    <FxCompile Include="..\resource\ps_Dx9.hlsl">
+    <FxCompile Include="..\resource\Cali_ps_Dx9.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">3.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -270,9 +281,24 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">3.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">3.0</ShaderModel>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D3DECLUSAGE_POSITION</PreprocessorDefinitions>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">3.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">3.0</ShaderModel>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">g_main</VariableName>
     </FxCompile>
-    <FxCompile Include="..\resource\vs_Dx9.hlsl">
+    <FxCompile Include="..\resource\Cali_vs_Dx9.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">3.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
@@ -281,9 +307,23 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">3.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">3.0</ShaderModel>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D3DECLUSAGE_POSITION</PreprocessorDefinitions>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">3.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">3.0</ShaderModel>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">g_main</VariableName>
     </FxCompile>
-  -->
     <FxCompile Include="..\resource\Cali_ps_Dx10.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
@@ -293,6 +333,22 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">4.0</ShaderModel>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">g_main</VariableName>
     </FxCompile>
     <FxCompile Include="..\resource\Cali_vs_Dx10.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
@@ -303,6 +359,74 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">4.0</ShaderModel>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">g_main</VariableName>
+    </FxCompile>
+    <FxCompile Include="..\resource\Cali_ps_Dx11.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">4.0</ShaderModel>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">g_main</VariableName>
+    </FxCompile>
+    <FxCompile Include="..\resource\Cali_vs_Dx11.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">4.0</ShaderModel>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">g_main</VariableName>
     </FxCompile>
     <FxCompile Include="..\resource\Cali_ps_Dx12.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
@@ -310,11 +434,25 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <SetRootSignature Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </SetRootSignature>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">4.0</ShaderModel>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">g_main</VariableName>
     </FxCompile>
     <FxCompile Include="..\resource\Cali_vs_Dx12.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
@@ -322,32 +460,26 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">4.0</ShaderModel>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|Win32'">g_main</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">%(Fullpath).h</HeaderFileOutput>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='FastBuild|x64'">g_main</VariableName>
     </FxCompile>
-    <!--
-    <FxCompile Include="..\resource\ps_Dx11.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="..\resource\vs_Dx11.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-    </FxCompile>
-  -->
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
