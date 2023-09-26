@@ -3,10 +3,10 @@
 #include "stdafx.h"
 using namespace prj_3d::HelloWinHlsl;
 using namespace prj_3d::HelloWinHlsl::ClientTy;
-using CurDxVer = DxVer::v9;
+//using CurDxVer = DxVer::v9;
 //using CurDxVer = DxVer::v10;
 //using CurDxVer = DxVer::v11;
-//using CurDxVer = DxVer::v12;
+using CurDxVer = DxVer::v12;
 
 template<class TSPE, class T = TSPE> class CaliCoastReplayTDM; // primary template
 
@@ -246,8 +246,8 @@ template<> class CaliCoastReplayTDM <DxVer::v12> : public CurClientApp<DxVer::v1
 	D3D_PRIMITIVE_TOPOLOGY m_enuPrimTopology;
 
 	struct PS_CONST_BUFF { 
-		DirectX::XMFLOAT2 iResolution;
 		float iTime;
+		DirectX::XMFLOAT2 iResolution;
 	};
 	CPtr< ID3D12RootSignature > m_pcRootSignature;
 	Dx::Tool::ConstantBuf::viaStruct::Accessor< T, PS_CONST_BUFF >::uptr_t m_puoConstBufAccessor;

@@ -1,6 +1,8 @@
 // pixel shader
-cbuffer PerFrameConstants : register (b0) { float2 iResolution; }
-cbuffer PerFrameConstants : register (b1) { float iTime; }
+cbuffer ConstantBuffer : register(b0) {
+	float iTime;
+	float2 iResolution;
+};
 
 // A documented, altered, recolored version of "Seascape".
 // The famous original at:
